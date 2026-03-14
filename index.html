@@ -6,7 +6,6 @@
     <title>Garage</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* Ensures the button takes up the full available window space */
         body, html { height: 100%; margin: 0; display: flex; align-items: center; justify-content: center; overflow: hidden; }
     </style>
 </head>
@@ -17,8 +16,8 @@
         <button id="login-btn" class="w-full bg-blue-600 text-white py-2 rounded font-bold text-sm">Log In</button>
     </div>
 
-    <div id="control-container" class="hidden w-full h-full p-2">
-        <button id="action-btn" class="w-full h-full bg-red-600 hover:bg-red-700 text-white font-black text-lg rounded shadow-lg active:scale-95 transition-transform">
+    <div id="control-container" class="hidden w-full h-full p-2 flex items-center justify-center">
+        <button id="action-btn" class="px-20 h-full bg-red-600 hover:bg-red-700 text-white font-black text-lg rounded shadow-lg active:scale-95 transition-transform whitespace-nowrap">
             CLOSE BAY DOOR
         </button>
     </div>
