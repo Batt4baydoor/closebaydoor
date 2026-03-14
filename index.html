@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Garage</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Ensures the button takes up the full available window space */
+        body, html { height: 100%; margin: 0; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+    </style>
+</head>
+<body class="bg-gray-900">
+
+    <div id="login-container" class="w-full p-4 space-y-2">
+        <input type="password" id="access-key-input" placeholder="Password" class="w-full p-2 border rounded text-sm">
+        <button id="login-btn" class="w-full bg-blue-600 text-white py-2 rounded font-bold text-sm">Log In</button>
+    </div>
+
+    <div id="control-container" class="hidden w-full h-full p-2">
+        <button id="action-btn" class="w-full h-full bg-red-600 hover:bg-red-700 text-white font-black text-lg rounded shadow-lg active:scale-95 transition-transform">
+            CLOSE BAY DOOR
+        </button>
+    </div>
+
+    <script>
+        const ACCESS_KEY = "dfrs12";
+        const WEBHOOK_URL = 'https://io.adafruit.com/api/v2/webhooks/feed/mHSaPrVAdpi9qgT4nLCoMCovNE95';
+
+        const loginContainer = document.getElementById('login-container');
+        const controlContainer = document.getElementById('control-container');
+        const accessKeyInput = document.getElementById('access-key-input');
+
+        document.getElementById('login-btn').addEventListener('click', () => {
+            if (accessKeyInput.value === ACCESS_KEY) {
+                loginContainer.classList.add('hidden');
+                controlContainer.classList.remove('hidden');
+            } else {
+                accessKeyInput.value = "";
+                alert("Incorrect");
+            }
+        });
+
+        document.getElementById('action-btn').addEventListener('click', async () => {
+            try {
+                await fetch(WEBHOOK_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ value: 'close30' })
+                });
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        });
+    </script>
+</body>
+</html>
